@@ -2,6 +2,8 @@
 #include <furi.h>
 #include <storage/storage.h>
 #include <lib/toolbox/path.h>
+#include <furi_hal_usb.h>
+
 
 static bool mass_storage_app_custom_event_callback(void* context, uint32_t event) {
     furi_assert(context);
@@ -19,6 +21,14 @@ static void mass_storage_app_tick_event_callback(void* context) {
     furi_assert(context);
     MassStorageApp* app = context;
     scene_manager_handle_tick_event(app->scene_manager);
+}
+
+static void configure_usb() {
+    FuriHalUsbInterface* usb = furi_record_open(RECORD_FURI_HAL_USB);
+    furi_hal_usb_set_serial_number(usb, "66666666");
+    furi_hal_usb_set_manufacturer_string(usb, "Marto666");
+    furi_hal_usb_set_product_string(usb, "Marto666");
+    furi_hal_usb_set_vid_pid(usb, 0x6666, 0x6666); // Заменете с желаните VID и PID
 }
 
 void mass_storage_app_show_loading_popup(MassStorageApp* app, bool show) {
