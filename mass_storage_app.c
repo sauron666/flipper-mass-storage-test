@@ -29,7 +29,8 @@ static void configure_usb() {
     furi_hal_usb_set_manufacturer_string(usb, "Marto666");
     furi_hal_usb_set_product_string(usb, "Marto666");
     furi_hal_usb_set_vid_pid(usb, 0x6666, 0x6666); // Заменете с желаните VID и PID
-}
+};
+furi_hal_usb_set_config(&usb_config);
 
 void mass_storage_app_show_loading_popup(MassStorageApp* app, bool show) {
     if(show) {
